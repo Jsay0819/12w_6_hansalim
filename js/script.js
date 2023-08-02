@@ -96,7 +96,7 @@ window.onload = function () {
   let brandTag = document.getElementById("data-brand");
   // 배너
   let BANNER_ARR;
-  let bannerTag = document.getElementById("");
+  let bannerTag = document.getElementById("data-banner");
   // =============================================================
 
   // 비주얼 화면 출력 기능
@@ -476,7 +476,7 @@ ${obj.txt}
     });
     html += `
     </div>
-    </div>`
+    </div>`;
     brandTag.innerHTML = html;
     const swBrand = new Swiper(".sw-brand", {
       slidesPerView: 3,
@@ -493,7 +493,40 @@ ${obj.txt}
   }
 
   // 배너 화면 출력 기능
-  function showBannerArr() {}
+  function showBannerArr() {
+    let html = `
+    <div class = "swiper sw-banner">
+    <div class = "swiper-wrapper">
+    `;
+    BANNER_ARR.forEach(function (item) {
+      let tag = `
+      <div class = "swiper-slide">
+      <a href = "${item.link}">
+      <img src = "../images/${item.image}" alt = "${item.title}"/>
+      </a>
+      </div>
+      `;
+      html += tag;
+    });
+    html += `
+    </div>
+    </div>
+    `;
+    bannerTag.innerHTML = html;
+    const showBanner = new Swiper(".sw-banner", {
+      Loop: true,
+      autoplay: {
+        delay: 2500,
+        disableOnInteraction: false,
+      },
+      slidesPerView: 2,
+      spaceBetween: 0,
+      navigation: {
+        prevEl: ".banner .banner-slide-prev",
+        nextEl: ".banner .banner-slide-next",
+      },
+    });
+  }
 
   // ===============================================================
 
