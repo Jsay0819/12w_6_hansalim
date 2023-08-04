@@ -40,6 +40,9 @@ window.onload = function () {
       BRAND_ARR = obj.brandarr;
       BANNER_ARR = obj.bannerarr;
       SEASON_ARR = obj.season;
+      REVIEW_ARR = obj.review;
+      NOTICE_ARR = obj.notice;
+      GOODNEWS_ARR = obj.goodnews;
 
       // 비주얼 화면에 배치한다
       showVisual();
@@ -61,6 +64,12 @@ window.onload = function () {
       showBannerArr();
       //시즌 목록을 화면에 배치
       showSeason();
+      // 리뷰 화면에 배치
+      showReview();
+      // 공지사항 목록을 화면에 배치
+      showNotice();
+      // 물품소식 목록을 화면에 배치
+      showGoodnews();
     }
   };
   // 자료를 호출한다.
@@ -102,6 +111,15 @@ window.onload = function () {
   //시즌목록 화면 출력
   let SEASON_ARR;
   let seasonTag = document.getElementById("data-season");
+  // 리뷰 화면 출력
+  let REVIEW_ARR;
+  let reviewTag = document.getElementById("data-review");
+  // 공지사항 화면 출력
+  let NOTICE_ARR;
+  let noticeTag = document.getElementById("data-notice");
+  // 물품소식 화면 출력
+  let GOODNEWS_ARR;
+  let goodnewsTag = document.getElementById("data-goodnews");
 
   //============================================
   // 비주얼 화면 출력 기능
@@ -221,6 +239,7 @@ window.onload = function () {
     todayTag.innerHTML = htmlTop;
     todayTag2.innerHTML = htmlBottom;
   }
+
   // 할인상품 화면 출력 기능
   function showSaleGood() {
     let html = `
@@ -275,6 +294,7 @@ window.onload = function () {
       },
     });
   }
+
   // 신상품 화면 출력 기능
   function showNewGood() {
     // 첫번째 화면 출력
@@ -313,6 +333,7 @@ window.onload = function () {
     });
     newListTag.innerHTML = html;
   }
+
   // 추천상품 화면 출력 기능
   function showRecommendGood() {
     let html = `
@@ -367,6 +388,7 @@ window.onload = function () {
       },
     });
   }
+
   // 인기상품 아이콘 화면 출력 가능
   function showPopularIconGood() {
     let html = `
@@ -437,6 +459,7 @@ window.onload = function () {
       //
     });
   }
+
   //인기 상품 화면 출력기능
   function showPopularGood() {
     let html = "";
@@ -466,6 +489,7 @@ window.onload = function () {
     });
     popularTag.innerHTML = html;
   }
+
   //브랜드 목록 화면 출력 기능
   function showBrandArr() {
     let html = `
@@ -514,6 +538,7 @@ window.onload = function () {
       },
     });
   }
+
   //배너 화면 출력 기능
   function showBannerArr() {
     let html = `
@@ -550,6 +575,7 @@ window.onload = function () {
       },
     });
   }
+
   //시즌목록 화면 출력기능
   const buyTotal = document.getElementById("buy-total");
   const buyTotalMoney = document.getElementById("buy-total-money");
@@ -649,6 +675,125 @@ window.onload = function () {
       //전체 체크 버튼 checked가 해제 되어야 함
       chkAll.checked = false;
     }
+  }
+
+  // 리뷰 목록 화면 출력 기능
+  function showReview() {
+    let html = `
+    <div class="swiper sw-review">
+    <div class="swiper-wrapper">
+    `;
+    // 데이터 처리
+    REVIEW_ARR.forEach(function (item) {
+      const tag = `
+      <div class="swiper-slide">
+      <div class="review-box">
+       <a href="${item.link}">
+         <div class= "review-box-desc">
+           <span class= "review-box-title">
+             ${item.title}
+           </span>
+           <span class="review-box-star"> ${item.star} </span>
+           <span class="review-box-img">
+           <img src="images/${item.pic}" alt="${item.title}" />
+           </span>
+         </div>
+         <p class="review-box-txt">
+             ${item.txt}
+         </p>
+        <span class="review-box-user"> ${item.user}${item.shop} </span>
+       </a>
+      </div>
+      </div>
+      `;
+      html += tag;
+    });
+    html += `
+    </div>
+    </div>
+    `;
+    reviewTag.innerHTML = html;
+    const swReview = new Swiper(".sw-review", {
+      slidesPerView: 3,
+      spaceBetween: 16,
+      slidesPerGroup: 3,
+      navigation: {
+        prevEl: ".review .slide-prev",
+        nextEl: ".review .slide-next",
+      },
+      pagination: {
+        el: ".review .slide-pg",
+        type: "fraction",
+      },
+    });
+  }
+
+  // 공지사항 화면 출력 기능
+  function showNotice() {
+    let html = "";
+    // 데이터 갱신
+    NOTICE_ARR.forEach(function (item) {
+      const tag = `
+      <li>
+      <a href = "${item.link}">
+      <span>
+      ${item.title}
+      </span><em>${item.date}</em>
+      </a>
+      </li>
+      `;
+      html += tag;
+    });
+    noticeTag.innerHTML = html;
+  }
+
+  // 물품 소식 화면 출력 기능
+  function showGoodnews() {
+    let html = "";
+    // 데이터 갱신
+    GOODNEWS_ARR.forEach(function (item) {
+      const tag = `
+      <li>
+      <a href = "${item.link}">
+      <span>
+      ${item.title}
+      </span><em>${item.date}</em>
+      </a>
+      </li>
+      `;
+      html += tag;
+    });
+    goodnewsTag.innerHTML = html;
+  }
+
+  // 커뮤니티 탭 메뉴
+  // 탭 버튼
+  const tabBtArr = document.querySelectorAll(".community-bt");
+  // 탭 내용
+  const tabConArr = document.querySelectorAll(".community-notice dd");
+  // 탭 포커스
+  let tabFocusIndex = 0;
+  // 탭 버튼 클릭 처리
+  tabBtArr.forEach(function (item, index) {
+    item.addEventListener("click", function () {
+      tabFocusIndex = index;
+      tabFocusFn();
+    });
+  });
+  // 탭 포커스 함수를 생성
+  function tabFocusFn() {
+    // 포커스 css를 적용 및 제거
+    // 일단 모두 제거하고 시작
+    tabBtArr.forEach(function (item) {
+      item.classList.remove("community-bt-active");
+    });
+    // 인덱스에 해달하는 것만 적용
+    tabBtArr[tabFocusIndex].classList.add("community-bt-active");
+    // 내용에서 일단 모두 제거하고 시작
+    tabConArr.forEach(function (item) {
+      item.classList.remove("community-visible-active");
+    });
+    tabConArr[tabFocusIndex].classList.add("community-visible-active");
   }
   // ========================================
   // 펼침 목록들 보기 기능
