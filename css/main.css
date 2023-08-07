@@ -1,5 +1,4 @@
 @charset "utf-8";
-
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;400;500;700;900&family=Roboto:wght@100;300;400;500;700;900&display=swap");
 * {
   margin: 0;
@@ -21,6 +20,7 @@ img {
 html {
   font-size: 16px;
 }
+
 body {
   font-family: "Roboto", "Noto Sans KR", sans-serif;
   font-size: 15px;
@@ -44,12 +44,100 @@ body {
   width: 1200px;
   margin: 0 auto;
 }
-/* swiper 기본 세팅 */
+/* swiper 기본 셋팅 */
 .swiper {
   width: 100%;
   height: 100%;
 }
-/* section 레이아웃 공통 패팅 */
+/* 고정메뉴 */
+.fix-menu {
+  position: fixed;
+  right: 0;
+  top: 175px;
+  display: block;
+  width: 85px;
+  z-index: 99999999;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 15px;
+  box-shadow: 0 4px 9px 0 rgba(0, 0, 0, 10%);
+  /* box-shadow: 0 4px 9px 0 rgba(0 0 0/ 10%); */
+  /* 똑같은거임 */
+  padding: 15px 10px 29px 10px;
+  overflow: hidden;
+}
+.fix-list {
+  position: relative;
+  display: block;
+}
+.fix-list > li {
+  position: relative;
+  display: block;
+  text-align: center;
+  font-size: 13px;
+  white-space: nowrap;
+  margin-bottom: 10px;
+}
+.fix-list > li > a {
+  position: relative;
+  display: block;
+}
+.fix-list > li > a::after {
+  content: "";
+  position: relative;
+  display: inline-block;
+  width: 36px;
+  height: 32px;
+  background: url("../images/icoFloating.png") no-repeat;
+}
+.fix-list > li span {
+  position: relative;
+  display: block;
+}
+.fix-login::after {
+  background-position: 0 0;
+}
+.fix-shop::after {
+  background-position: 0 -32px !important;
+}
+.good-recent {
+  display: inline-block !important;
+  width: 50px !important;
+  height: 50px !important;
+  overflow: hidden;
+}
+/* 뒷편 아이콘 없애기 */
+.good-recent::after {
+  content: none !important;
+}
+.good-recent img {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 100%;
+  transform: translate(-50%, -50%);
+}
+.fix-qa::after {
+  background-position: 0 calc(-32px * 2) !important;
+}
+.fix-qa::after {
+  background-position: 0 calc(-32px * 3) !important;
+}
+.fix-top {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  display: block;
+  width: 100%;
+  line-height: 29px;
+  border: 0;
+  cursor: pointer;
+  font-size: 11px;
+  background-color: #000;
+  color: #fff;
+  text-transform: uppercase;
+}
+/* section 레이아웃 공통 패딩 */
 .wrap > section {
   padding: 80px 0;
 }
@@ -73,7 +161,7 @@ body {
   content: "";
   position: absolute;
   bottom: 0;
-  left: 2px;
+  left: 0px;
   width: 20px;
   height: 2px;
   background-color: #707070;
@@ -124,11 +212,11 @@ body {
   background-position: 0px -20px;
 }
 .slide-next {
-  right: 0;
   background: url("../images/swiperArrN.png") no-repeat;
+  right: 0;
 }
 .slide-next:hover {
-  background-position: 0 -20px;
+  background-position: 0px -20px;
 }
 .slide-pg {
   position: relative;
@@ -137,13 +225,13 @@ body {
   bottom: 0 !important;
 }
 
-/* 전체 레이아웃 */
+/* 전체레이아웃 */
 .wrap {
   position: relative;
   display: block;
   /* 헤더가 fix가 되므로 레이아웃용 */
   padding-top: 128px;
-  transition: padding-top 0.2;
+  transition: padding-top 0.2s;
 }
 .header.active {
   top: -61px;
@@ -214,16 +302,19 @@ body {
   float: left;
   padding: 0 10px;
 }
-.member-list li::after {
+.member-list > li::after {
   content: "";
   position: absolute;
   top: 7px;
   right: 0;
   width: 1px;
-  height: 8px;
+  height: 9px;
   background-color: #bbb;
 }
-.member-list li:last-child:after {
+.member-list > li:last-child {
+  padding-right: 0;
+}
+.member-list > li:last-child:after {
   content: none;
 }
 .member-list > li > a {
@@ -232,19 +323,19 @@ body {
   font-size: 13px;
   color: #666;
 }
-/* center-more 는 js 연동 */
+/* center-more는 js연동 */
 .center-more {
   padding-right: 15px;
 }
 .center-more::after {
   content: "";
+  position: absolute;
   width: 10px;
   height: 6px;
-  position: absolute;
   display: block;
   top: 50%;
-  right: 0%;
-  transform: translateY(-50%);
+  right: 0;
+  transform: translatey(-50%);
   background: url("../images/icoMyMenu.png") no-repeat;
   background-position: 0px 0px;
 }
@@ -272,12 +363,11 @@ body {
   display: block;
   white-space: nowrap;
 }
-/* 헤더의 메인 (하단)*/
+/* 헤더의 메인(하단) */
 .header-main {
   display: block;
   position: relative;
   padding: 13px 0;
-  /* background-color: aquamarine; */
 }
 .header-main-left {
   position: relative;
@@ -289,7 +379,7 @@ body {
   display: inline-block;
   padding-top: 12px;
   margin-right: 45px;
-  /* background-color: antiquewhite; */
+  /* background-color: bisque; */
 }
 .gnb {
   position: relative;
@@ -316,6 +406,7 @@ body {
 .gnb > li > a:hover {
   color: #76bd42;
 }
+
 .ball::after {
   content: "";
   position: absolute;
@@ -330,6 +421,7 @@ body {
   position: relative;
   display: block;
   font-size: 17px;
+  color: #000;
   font-weight: 500;
   border: 0;
   background-color: transparent;
@@ -340,8 +432,7 @@ body {
   display: inline-block;
   margin-right: 12px;
 }
-
-/* 전체메뉴 */
+/* 전체 메뉴 */
 .all-menu-area {
   position: absolute;
   left: 0;
@@ -349,18 +440,17 @@ body {
   display: inline-block;
   height: 43px;
   width: 100px;
-  /* background-color: #000; */
 }
 .all-menu {
-  background-color: #fff;
   position: absolute;
   left: 0;
   top: 41px;
   width: 210px;
+  background-color: #fff;
   height: 0;
   border: 1px solid #ddd;
   box-shadow: 0 3px 6px 0 rgb(0 0 0 / 16%);
-  /* visibility: hidden; */
+  visibility: hidden;
   overflow: hidden;
   transition: width 0.5s;
 }
@@ -374,19 +464,33 @@ body {
 .all-menu-cate {
   position: relative;
   display: block;
-  height: calc(100vh - 105px - 128px);
   width: 210px;
+  height: calc(100vh - 105px - 128px);
   background-color: #fff;
   overflow: auto;
-  /* 여기에 스크롤을 걸어줌 */
+  /* 여기에다사 스크롤을 걸어줌 */
 }
+/* 스크롤 */
+.all-menu-cate::-webkit-scrollbar {
+  width: 5px;
+}
+.all-menu-cate::-webkit-scrollbar-thumb {
+  background-color: gray;
+  border-radius: 5px;
+}
+.all-menu-cate::-webkit-scrollbar-track {
+  background-color: rgba(128, 128, 128, 0);
+  border-radius: 5px;
+  box-shadow: inset 0px 0px 5px white;
+}
+/* 스크롤끝 */
 .cate-list {
   position: relative;
 }
 .cate-list > li {
   position: relative;
   font-size: 15px;
-  font-weight: 400;
+  font-weight: 500;
   line-height: 40px;
 }
 .cate-list > li > a {
@@ -397,6 +501,7 @@ body {
 .cate-list > li > a::after {
   content: "";
   position: absolute;
+  /* top: calc(50% - 5px); */
   top: 50%;
   transform: translateY(-50%);
   right: 20px;
@@ -425,8 +530,8 @@ body {
   bottom: 0;
   display: block;
   height: 1px;
-  background-color: #ddd;
   width: calc(100% - 24px - 24px);
+  background-color: #ddd;
 }
 .theme-list > li:first-child::before {
   content: "";
@@ -435,8 +540,8 @@ body {
   top: 0;
   display: block;
   height: 1px;
-  background-color: #666;
   width: calc(100% - 24px - 24px);
+  background-color: #666;
 }
 .theme-list > li:last-child::after {
   background-color: #666;
@@ -449,9 +554,10 @@ body {
 .theme-list > li > a::after {
   content: "";
   position: absolute;
+  /* top: calc(50% - 5px); */
+  top: 50%;
   transform: translateY(-50%);
   right: 20px;
-  top: 50%;
   width: 6px;
   height: 10px;
   background: url("../images/icoGnbArr1.png") no-repeat 0 0px;
@@ -486,9 +592,10 @@ body {
 .deli-list > li > a::after {
   content: "";
   position: absolute;
+  /* top: calc(50% - 5px); */
+  top: 50%;
   transform: translateY(-50%);
   right: 20px;
-  top: 50%;
   width: 6px;
   height: 10px;
   background: url("../images/icoGnbArr1.png") no-repeat 0 0px;
@@ -500,6 +607,7 @@ body {
   position: absolute;
   left: 210px;
   top: 0;
+  height: 800px;
   width: 210px;
 }
 .cate-depth2-list {
@@ -507,8 +615,9 @@ body {
   left: 0;
   top: 0;
   width: 100%;
+  height: 700px;
   padding: 0 24px;
-  /* depth2를 한자리에 모은 것 */
+  /* deoth2를 한자리에 모으는 것 */
 }
 .cate-depth2-list > li {
   font-size: 15px;
@@ -1573,6 +1682,44 @@ body {
   padding: 0 40px;
   float: left;
 }
+.community-visible-active {
+  display: block !important;
+}
+.notice-list {
+  position: relative;
+  display: block;
+}
+.notice-list > li {
+  position: relative;
+  display: block;
+  line-height: 1;
+  margin-bottom: 15px;
+}
+
+.notice-list > li > a {
+  position: relative;
+  display: block;
+  font-size: 13px;
+}
+
+.notice-list > li > a > span {
+  position: relative;
+  display: inline-block;
+  /* 말줄임 */
+  width: 240px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.notice-list > li > a > em {
+  position: relative;
+  display: inline-block;
+  width: calc(100% - 240px);
+  color: #999;
+  font-style: normal;
+  text-align: right;
+  vertical-align: 2px;
+}
 .community-info h3 {
   position: relative;
   display: block;
@@ -1631,6 +1778,14 @@ body {
   font-weight: 700;
   margin-bottom: 20px;
 }
+.community-notice > dl > dd {
+  position: absolute;
+  left: 0;
+  top: 50px;
+  display: none;
+  width: 100%;
+  background-color: #fff;
+}
 .community-help-list {
   position: relative;
   display: block;
@@ -1677,4 +1832,223 @@ body {
   width: 1px;
   height: 190px;
   background-color: #ddd;
+}
+/* 하단 */
+.footer {
+  position: relative;
+  display: block;
+}
+.family-box {
+  position: absolute;
+  left: 0;
+  bottom: calc(65px + 144px);
+  width: 100%;
+  height: 330px;
+  visibility: hidden;
+  overflow: hidden;
+}
+.family {
+  position: absolute;
+  left: 0;
+  top: 100%;
+  display: block;
+  width: 100%;
+  background-color: #f5f5f5;
+  padding: 40px 0;
+  visibility: hidden;
+  transition: top 0.5s, visibility 0.5s;
+}
+.family.active {
+  visibility: visible;
+  top: 0px;
+}
+.family-list {
+  display: flex;
+  justify-content: space-between;
+  width: calc(100% - 50px);
+}
+.family-close {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 30px;
+  height: 30px;
+  background: url("../images/btnFamilyClose.png") no-repeat center;
+  border: 0;
+  font-size: 0;
+  cursor: pointer;
+}
+.family-title {
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 22px;
+  color: #76bd42;
+  margin-bottom: 20px;
+}
+.family-area {
+  font-size: 13px;
+  line-height: 22px;
+}
+.footer-top {
+  position: relative;
+  display: block;
+  border-top: 1px solid #f2f2f2;
+  background-color: #fff;
+}
+.footer-menu {
+  position: relative;
+  display: block;
+  padding: 20px 0;
+  float: left;
+}
+.footer-menu > li {
+  position: relative;
+  display: block;
+  float: left;
+  padding: 0 10px;
+}
+.footer-menu > li::after {
+  content: "";
+  position: absolute;
+  right: -1px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 2px;
+  height: 2px;
+  background-color: #a9b0b8;
+}
+.footer-menu > li:first-child {
+  padding-left: 0;
+}
+.footer-menu > li:last-child {
+  padding-right: 0;
+}
+.footer-menu > li:last-child::after {
+  content: none;
+}
+.footer-link.active {
+  background-color: #f5f5f5;
+}
+.footer-link {
+  position: relative;
+  display: block;
+  border: 0;
+  cursor: pointer;
+  background-color: #fff;
+  line-height: 64px;
+  float: right;
+  font-size: 13px;
+  color: #666;
+  padding: 0 15px;
+}
+
+.blank {
+  display: inline-block;
+  width: 30px;
+  height: 10px;
+}
+.footer-link::after {
+  content: "";
+  display: inline-block;
+  position: relative;
+  width: 12px;
+  height: 12px;
+  background: url("../images/btnMore.png") no-repeat;
+  vertical-align: -1px;
+}
+.footer-main {
+  position: relative;
+  display: block;
+  border-top: 1px solid #f2f2f2;
+  padding: 20px 0;
+}
+.footer-copy {
+  position: relative;
+  display: block;
+  float: left;
+}
+.copy-list {
+  position: relative;
+  display: block;
+}
+.copy-list > li {
+  position: relative;
+  display: block;
+  font-size: 13px;
+  line-height: 1;
+  margin-bottom: 10px;
+  color: #666;
+}
+.copy-list > li > span {
+  position: relative;
+  display: inline-block;
+  padding: 0 8px;
+}
+.copy-list > li > span::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  display: block;
+  width: 1px;
+  height: 10px;
+  background-color: #e5e5e5;
+}
+.copy-list > li > span:first-child {
+  padding-left: 0;
+}
+.copy-list > li > span:last-child {
+  padding-left: 0;
+}
+.copy-list > li > span:last-child::after {
+  content: none;
+}
+.copy-txt {
+  position: relative;
+  display: block;
+  color: #999;
+  font-size: 11px;
+  margin-top: 20px;
+}
+.footer-sns {
+  position: relative;
+  display: block;
+  float: right;
+}
+.sns-list {
+  position: relative;
+  display: block;
+}
+.sns-list > li {
+  float: left;
+  padding: 0 5px;
+}
+.sns-list > li:first-child {
+  padding-left: 0;
+}
+.sns-list > li:last-child {
+  padding-left: 0;
+}
+.sns-list > li > a {
+  position: relative;
+  display: block;
+  width: 26px;
+  height: 26px;
+  background: url("../images/ftSns.png") no-repeat;
+}
+.is {
+  background-position: 0px -26px !important;
+}
+.fb {
+  background-position: 0px 0px !important;
+}
+.nb {
+  background-position: 0px calc(-26px * 2) !important;
+}
+.yt {
+  background-position: 0px calc(-26px * 3) !important;
+}
+.kk {
+  background-position: 0px calc(-26px * 4) !important;
 }
